@@ -71,7 +71,6 @@ export default function Projects() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="max-w-6xl mx-auto bg-[#202124] rounded-xl overflow-hidden shadow-2xl border border-[#35363A] font-[Arial,sans-serif]"
                 >
-                    {/* Tab Bar - Hidden on Mobile */}
                     <div className="hidden md:flex items-end px-2 pt-2 gap-2 bg-[#202124]">
                         <div className="flex-1 flex items-center px-3 py-2 gap-2 overflow-x-auto no-scrollbar">
                             <div className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-[#292A2D] cursor-pointer text-gray-400 mr-2">
@@ -113,16 +112,13 @@ export default function Projects() {
                         </div>
                     </div>
 
-                    {/* Navigation Bar / Address Bar */}
                     <div className="bg-[#35363A] px-4 py-2 flex items-center gap-4 text-gray-400 border-b border-[#202124]">
-                        {/* Desktop Controls */}
                         <div className="hidden md:flex items-center gap-5">
                             <FaArrowLeft className="hover:text-white cursor-pointer" size={16} />
                             <FaArrowRight className="hover:text-white cursor-pointer" size={16} />
                             <FaRedo className="hover:text-white cursor-pointer" size={14} />
                         </div>
 
-                        {/* Omnibox */}
                         <div className="flex-1 bg-[#202124] rounded-full px-4 py-1.5 flex items-center gap-3 text-sm text-gray-300 border border-transparent focus-within:border-orange-500/50 transition-colors">
                             <FaLock size={12} className="text-emerald-500" />
                             <input
@@ -131,10 +127,8 @@ export default function Projects() {
                                 readOnly
                                 className="flex-1 bg-transparent border-none outline-none text-white text-sm font-sans placeholder-gray-500"
                             />
-                            {/* Desktop Star Icon */}
                             <FaRegStar size={14} className="hidden md:block hover:text-orange-400 cursor-pointer" />
 
-                            {/* Mobile Next Project Button */}
                             <button
                                 onClick={handleNextProject}
                                 className="md:hidden p-1.5 hover:bg-[#35363A] rounded-full text-gray-400 hover:text-white transition-colors flex items-center justify-center"
@@ -148,7 +142,6 @@ export default function Projects() {
                             </button>
                         </div>
 
-                        {/* Menu */}
                         <div className="flex gap-3 items-center pl-2 border-l border-gray-600">
                             <div className="hidden md:block w-6 h-6 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
                             <HiDotsVertical size={16} className="hover:text-white cursor-pointer" />

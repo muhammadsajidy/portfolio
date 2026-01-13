@@ -101,9 +101,14 @@ export default function Hero() {
                         transition={{ delay: 3.5, duration: 0.5 }}
                         className="flex flex-col md:flex-row items-center gap-6 pt-4"
                     >
-                        <button className="px-6 py-2 md:px-8 md:py-3 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white rounded-full transition-all duration-300 font-medium cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap text-sm md:text-base">
+                        <a
+                            href="https://drive.google.com/file/d/1M3YGt52dJVqeVnuLBrg7_zJYUDSaYJ5L/view?usp=sharing"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-6 py-2 md:px-8 md:py-3 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white rounded-full transition-all duration-300 font-medium cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap text-sm md:text-base"
+                        >
                             VIEW RESUME <FaArrowRight />
-                        </button>
+                        </a>
 
                         <div className="flex gap-4">
                             <a href="https://www.linkedin.com/in/muhammadsajidy/" target="_blank" className="w-10 h-10 rounded-full border border-orange-500 flex items-center justify-center text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 cursor-pointer">

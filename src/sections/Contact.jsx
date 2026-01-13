@@ -14,15 +14,15 @@ export default function Contact() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Since no backend is defined, we'll simple open a mailto link
         const subject = `Contact from Portfolio: ${formData.name}`;
         const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
         window.location.href = `mailto:muhammadsajidy04@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        setFormData({ name: "", email: "", message: "" });
     };
 
     return (
         <section className="relative py-20 bg-slate-950 text-white overflow-hidden">
-            {/* Background Effects */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]"></div>
                 <div className="absolute top-[-20%] right-[-10%] w-[30%] h-[30%] bg-orange-500/10 rounded-full blur-[100px]"></div>
@@ -47,9 +47,7 @@ export default function Contact() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="max-w-xl mx-auto"
                 >
-                    {/* Dark Minimalist Form */}
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        {/* Name Input */}
+                    <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
                         <div className="group">
                             <input
                                 type="text"
@@ -58,11 +56,11 @@ export default function Contact() {
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
+                                autoComplete="off"
                                 className="w-full bg-[#1e1e1e] text-slate-300 px-4 py-3 outline-none border-b-2 border-[#333333] focus:border-orange-500 transition-colors duration-300 placeholder-slate-500"
                             />
                         </div>
 
-                        {/* Email Input */}
                         <div className="group">
                             <input
                                 type="email"
@@ -71,11 +69,11 @@ export default function Contact() {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
+                                autoComplete="off"
                                 className="w-full bg-[#1e1e1e] text-slate-300 px-4 py-3 outline-none border-b-2 border-[#333333] focus:border-orange-500 transition-colors duration-300 placeholder-slate-500"
                             />
                         </div>
 
-                        {/* Message Input */}
                         <div className="group">
                             <textarea
                                 name="message"
@@ -88,7 +86,6 @@ export default function Contact() {
                             ></textarea>
                         </div>
 
-                        {/* Submit Button */}
                         <div className="flex justify-end pt-2">
                             <button
                                 type="submit"
@@ -97,7 +94,6 @@ export default function Contact() {
                                 <span className="relative z-10 text-white font-bold tracking-widest text-sm uppercase">
                                     SUBMIT
                                 </span>
-                                {/* Animated Underline */}
                                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#f87171] transform scale-x-100 transition-transform duration-300 origin-left"></span>
                             </button>
                         </div>

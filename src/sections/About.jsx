@@ -72,7 +72,6 @@ export default function About() {
                     </div>
                 </motion.div>
 
-                {/* Left Geometry: Icosahedron */}
                 <div className="absolute -top-20 -left-64 md:-top-40 md:-left-64 w-[500px] h-[500px] md:w-[600px] md:h-[600px] opacity-30 md:opacity-60 z-0 pointer-events-none">
                     <Canvas camera={{ position: [0, 0, 5], fov: 40 }}>
                         <Float speed={2} rotationIntensity={1.5} floatIntensity={1}>
@@ -81,7 +80,6 @@ export default function About() {
                     </Canvas>
                 </div>
 
-                {/* Right Geometry: Octahedron */}
                 <div className="absolute -bottom-20 -right-64 md:-bottom-40 md:-right-64 w-[500px] h-[500px] md:w-[600px] md:h-[600px] opacity-30 md:opacity-60 z-0 pointer-events-none">
                     <Canvas camera={{ position: [0, 0, 5], fov: 35 }}>
                         <Float speed={1.5} rotationIntensity={2} floatIntensity={1}>
