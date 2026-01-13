@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+    --animate-spin-slow: spin 8s linear infinite;
+    --animate-reverse-spin: reverse-spin 10s linear infinite;
+
+    @keyframes reverse-spin {
+        from {
+            transform: rotate(360deg);
+        }
+
+        to {
+            transform: rotate(0deg);
+        }
+    }
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f97316;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ea580c;
+}
+
+::-webkit-scrollbar-button {
+    display: block;
+    background-color: #f97316;
+    height: 6px;
+}
