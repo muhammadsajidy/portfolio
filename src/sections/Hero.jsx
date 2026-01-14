@@ -1,6 +1,6 @@
 import GridBackground from '../components/GridBackground';
 import { motion } from "framer-motion";
-import { FaLinkedin, FaInstagram, FaGithub, FaArrowRight, FaChevronDown } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 import sajid from "../assets/sajid.png";
 
 const TypingText = ({ text, className, delay = 0 }) => {
@@ -101,26 +101,22 @@ export default function Hero() {
                         transition={{ delay: 3.5, duration: 0.5 }}
                         className="flex flex-col md:flex-row items-center gap-6 pt-4"
                     >
-                        <a
-                            href="https://drive.google.com/file/d/1M3YGt52dJVqeVnuLBrg7_zJYUDSaYJ5L/view?usp=sharing"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-6 py-2 md:px-8 md:py-3 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white rounded-full transition-all duration-300 font-medium cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap text-sm md:text-base"
-                        >
-                            VIEW RESUME <FaArrowRight />
-                        </a>
-
-                        <div className="flex gap-4">
-                            <a href="https://www.linkedin.com/in/muhammadsajidy/" target="_blank" className="w-10 h-10 rounded-full border border-orange-500 flex items-center justify-center text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 cursor-pointer">
-                                <FaLinkedin size={20} />
-                            </a>
-                            <a href="https://www.instagram.com/_.sajid_.04/" target="_blank" className="w-10 h-10 rounded-full border border-orange-500 flex items-center justify-center text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 cursor-pointer">
-                                <FaInstagram size={20} />
-                            </a>
-                            <a href="https://github.com/muhammadsajidy" target="_blank" className="w-10 h-10 rounded-full border border-orange-500 flex items-center justify-center text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 cursor-pointer">
-                                <FaGithub size={20} />
+                        <div className="group/btn relative">
+                            <div className="absolute inset-0 bg-orange-500/20 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                            <a
+                                href="https://drive.google.com/file/d/1M3YGt52dJVqeVnuLBrg7_zJYUDSaYJ5L/view?usp=sharing"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="relative inline-block px-10 py-4 rounded-xl border-2 border-orange-500 text-orange-500 font-mono text-base font-bold hover:bg-orange-500 hover:text-white transition-all duration-300"
+                            >
+                                <span className="mr-2 opacity-50">//</span>
+                                View Resume
+                                <span className="mx-2 opacity-50">_</span>
+                                <span className="group-hover/btn:translate-x-1 inline-block transition-transform duration-300">=&gt;</span>
                             </a>
                         </div>
+
+
                     </motion.div>
                 </div>
 

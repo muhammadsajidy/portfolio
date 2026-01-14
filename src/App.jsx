@@ -13,7 +13,6 @@ export default function App() {
       <About />
       <Projects />
       <Certificates />
-      <Contact />
       <Footer />
     </div>
   )

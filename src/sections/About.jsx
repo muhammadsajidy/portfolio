@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Edges, Float } from "@react-three/drei";
 import { motion } from "framer-motion";
-import { SiReact, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiSupabase, SiFastapi, SiFlask, SiMysql, SiHtml5, SiCss3, SiJavascript } from "react-icons/si";
+import { SiReact, SiTailwindcss, SiExpress, SiMongodb, SiPostgresql, SiSupabase, SiFastapi, SiFlask, SiMysql, SiHtml5, SiCss3, SiJavascript, SiPython } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 
 const skills = [
     { Icon: SiHtml5, name: "HTML5", color: "#E34F26" },
     { Icon: SiCss3, name: "CSS3", color: "#1572B6" },
     { Icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
+    { Icon: SiPython, name: "Python", color: "#3776AB" },
     { Icon: SiReact, name: "React", color: "#61DAFB" },
     { Icon: SiTailwindcss, name: "Tailwind CSS", color: "#06B6D4" },
     { Icon: SiExpress, name: "Express.js", color: "#ffffff" },
@@ -52,9 +53,17 @@ export default function About() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="max-w-xl mx-auto text-justify px-4 md:px-0"
                 >
-                    <p className="text-base md:text-xl text-slate-300 leading-relaxed font-light mb-12">
-                        I'm a B.Tech student at VIT-AP with a passion for building robust web applications. As a full-stack developer with experience in freelancing, I thrive on turning ideas into reality. When I'm not debugging or crushing competitive coding challenges, you'll find me gaming or playing football.
-                    </p>
+                    <div className="text-base md:text-xl text-slate-300 leading-relaxed font-light mb-12 space-y-6">
+                        <p>
+                            I am a third-year Computer Science and Engineering student at VIT-AP University with expertise across machine learning, web development, mobile application development, and cybersecurity.
+                        </p>
+                        <p>
+                            I actively solve algorithmic challenges on platforms like <a href="https://leetcode.com/u/md_sajid_04/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:underline">LeetCode</a> and occasionally participate in Capture The Flag (CTF) competitions. My diverse technical background and commitment to continuous learning drive me to build innovative solutions and tackle complex problems.
+                        </p>
+                        <p>
+                            I am currently seeking opportunities to apply my skills in real-world projects and contribute to impactful initiatives. Beyond technology, I enjoy playing football.
+                        </p>
+                    </div>
 
                     <h3 className="text-2xl font-bold text-center mb-8 text-white">Technologies I'm experienced in</h3>
 

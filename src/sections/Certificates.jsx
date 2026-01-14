@@ -1,201 +1,30 @@
-
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Edges, Text, useCursor } from "@react-three/drei";
 import { motion } from "framer-motion";
-import * as THREE from "three";
-import { useState, useRef, useEffect, useMemo } from "react";
+import { FaPython, FaReact, FaJs, FaShieldAlt, FaBrain, FaRobot, FaExternalLinkAlt } from "react-icons/fa";
 
-// Data
-// Data
+
 const certificates = [
-    { id: 1, title: "Generative AI", issuer: "IBM", color: "#2563eb", link: "https://drive.google.com/file/d/1qc_mfYbHBTHI0AAbQxtWJRbkyY88WgA1/view?usp=sharing" },
-    { id: 2, title: "Python (Basic)", issuer: "HackerRank", color: "#ca8a04", link: "https://drive.google.com/file/d/1-Jyk5V5BjGrRNh2Z40-qJTDG1tKItLcq/view?usp=sharing" },
-    { id: 3, title: "React (Basic)", issuer: "HackerRank", color: "#06b6d4", link: "https://drive.google.com/file/d/1MF4Ge6j__e7aD7lhesLdB8hz9JjzKCLb/view?usp=sharing" },
-    { id: 4, title: "JavaScript (Basic)", issuer: "HackerRank", color: "#eab308", link: "https://drive.google.com/file/d/1y4aG1Mg-3fuCdSbYtkifamQypUeYbfrL/view?usp=sharing" },
-    { id: 5, title: "Security Principles", issuer: "ISC2", color: "#059669", link: "https://drive.google.com/file/d/1J7rsv0_zcm7RFHSCDKUEsLdxkb2Divan/view?usp=sharing" },
-    { id: 6, title: "Applied Machine Learning", issuer: "University of Michigan", color: "#3b82f6", link: "https://drive.google.com/file/d/1tsVkOAGc6nsdLTagxeE4GK8XMmq-D6i2/view?usp=sharing" }
+    { id: 1, title: "Generative AI", issuer: "IBM", date: "June 2025", color: "#2563eb", link: "https://drive.google.com/file/d/1qc_mfYbHBTHI0AAbQxtWJRbkyY88WgA1/view?usp=sharing", icon: FaBrain },
+    { id: 2, title: "Python (Basic)", issuer: "HackerRank", date: "Dec 2023", color: "#ca8a04", link: "https://drive.google.com/file/d/1-Jyk5V5BjGrRNh2Z40-qJTDG1tKItLcq/view?usp=sharing", icon: FaPython },
+    { id: 3, title: "React (Basic)", issuer: "HackerRank", date: "Jan 2025", color: "#06b6d4", link: "https://drive.google.com/file/d/1MF4Ge6j__e7aD7lhesLdB8hz9JjzKCLb/view?usp=sharing", icon: FaReact },
+    { id: 4, title: "JavaScript (Basic)", issuer: "HackerRank", date: "Jan 2025", color: "#eab308", link: "https://drive.google.com/file/d/1y4aG1Mg-3fuCdSbYtkifamQypUeYbfrL/view?usp=sharing", icon: FaJs },
+    { id: 5, title: "Security Principles", issuer: "ISC2", date: "Oct 2025", color: "#059669", link: "https://drive.google.com/file/d/1J7rsv0_zcm7RFHSCDKUEsLdxkb2Divan/view?usp=sharing", icon: FaShieldAlt },
+    { id: 6, title: "Applied Machine Learning", issuer: "University of Michigan", date: "September 2025", color: "#3b82f6", link: "https://drive.google.com/file/d/1tsVkOAGc6nsdLTagxeE4GK8XMmq-D6i2/view?usp=sharing", icon: FaRobot }
 ];
 
-function FileFolder({ index, cert }) {
-    const [hovered, setHovered] = useState(false);
-    const groupRef = useRef();
-
-    useCursor(hovered);
-
-    const folderShape = useMemo(() => {
-        const shape = new THREE.Shape();
-        const width = 2.8;
-        const height = 1.15;
-        const tabWidth = 0.8;
-        const tabHeight = 0.2;
-
-        const halfW = width / 2;
-        const halfH = height / 2;
-
-        shape.moveTo(-halfW, -halfH);
-        shape.lineTo(halfW, -halfH);
-        shape.lineTo(halfW, halfH);
-        shape.lineTo(-halfW + tabWidth, halfH);
-        shape.lineTo(-halfW + tabWidth, halfH + tabHeight);
-        shape.lineTo(-halfW, halfH + tabHeight);
-        shape.lineTo(-halfW, -halfH);
-
-        return shape;
-    }, []);
-
-    useFrame((state, delta) => {
-        if (groupRef.current) {
-            const targetY = hovered ? 0.05 : -0.25;
-            groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, delta * 15);
-
-            const targetRotX = hovered ? 0.2 : 0;
-            groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetRotX, delta * 15);
-        }
-    });
-
-    return (
-        <group
-            onPointerOver={(e) => { e.stopPropagation(); setHovered(true); }}
-            onPointerOut={(e) => { e.stopPropagation(); setHovered(false); }}
-            onClick={() => window.open(cert.link, "_blank")}
-        >
-            <group ref={groupRef}>
-                <mesh position={[0, 0, -0.02]}>
-                    <extrudeGeometry args={[folderShape, { depth: 0.04, bevelEnabled: false }]} />
-                    <meshStandardMaterial color={cert.color} roughness={0.6} metalness={0.1} />
-                    <Edges color="#ffffff" threshold={15} opacity={0.5} transparent />
-                </mesh>
-
-                <group position={[0, 0.35, 0.05]}>
-                    <Text
-                        fontSize={0.25}
-                        color={hovered ? cert.color : "#ffffff"}
-                        anchorX="center"
-                        anchorY="middle"
-                        position={[1.1, 0, 0.01]}
-                        fontWeight="bold"
-                    >
-                        ↗
-                    </Text>
-                </group>
-            </group>
-        </group>
-    );
-}
-
-function WallOrganizer({ certs, position, rotation, scale = 1 }) {
-    const WireBasket = ({ position, cert, children }) => {
-        return (
-            <group position={position}>
-                <group position={[0, 0, -0.05]}>
-                    {children}
-                </group>
-
-                <group position={[0, -0.4, 0.2]} rotation={[0.15, 0, 0]}>
-                    <mesh>
-                        <boxGeometry args={[3.0, 0.8, 0.02]} />
-                        <meshBasicMaterial color="#020617" transparent opacity={0.9} />
-                        <Edges color="#f97316" scale={1} threshold={15} />
-                    </mesh>
-
-                    <group position={[0, 0, 0.03]}>
-                        <Text
-                            fontWeight="bold"
-                            fontSize={0.18}
-                            color="#ffffff"
-                            anchorX="center"
-                            anchorY="middle"
-                            maxWidth={2.8}
-                            textAlign="center"
-                        >
-                            {cert.title}
-                        </Text>
-                        <Text
-                            fontSize={0.1}
-                            color="#94a3b8"
-                            anchorX="center"
-                            anchorY="top"
-                            position={[0, -0.15, 0]}
-                        >
-                            {cert.issuer}
-                        </Text>
-                    </group>
-                </group>
-
-                <mesh position={[0, -0.85, 0.1]} rotation={[0.15, 0, 0]}>
-                    <boxGeometry args={[3.0, 0.05, 0.4]} />
-                    <meshBasicMaterial color="#020617" />
-                    <Edges color="#f97316" />
-                </mesh>
-
-                <mesh position={[-1.5, -0.4, 0.2]} rotation={[0.15, 0, 0]}>
-                    <boxGeometry args={[0.02, 0.8, 0.02]} />
-                    <meshBasicMaterial color="#f97316" />
-                </mesh>
-                <mesh position={[1.5, -0.4, 0.2]} rotation={[0.15, 0, 0]}>
-                    <boxGeometry args={[0.02, 0.8, 0.02]} />
-                    <meshBasicMaterial color="#f97316" />
-                </mesh>
-            </group>
-        );
-    };
-
-    const backboardHeight = certs.length * 1.6 + 0.5;
-
-    return (
-        <group scale={scale} position={position} rotation={rotation}>
-            <group position={[0, 0, -0.5]}>
-                <mesh>
-                    <boxGeometry args={[3.4, backboardHeight, 0.1]} />
-                    <meshBasicMaterial color="#020617" transparent opacity={0.5} />
-                    <Edges color="#f97316" scale={1} threshold={15} />
-                </mesh>
-            </group>
-
-            {certs.map((cert, i) => {
-                const yStart = ((certs.length - 1) * 1.6) / 2;
-                const yPos = yStart - (i * 1.6);
-
-                return (
-                    <WireBasket key={cert.id} cert={cert} position={[0, yPos, 0]}>
-                        <FileFolder index={i} cert={cert} />
-                    </WireBasket>
-                );
-            })}
-        </group>
-    );
-}
-
 export default function Certificates() {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
-    }, []);
-
-    const basicCerts = certificates.filter(c => c.title.includes("(Basic)"));
-    const advancedCerts = certificates.filter(c => !c.title.includes("(Basic)"));
-
-    const allCerts = [...basicCerts, ...advancedCerts];
-
     return (
         <section className="relative py-20 bg-slate-950 text-white overflow-hidden min-h-[600px]">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[100px]"></div>
+                <div className="absolute top-[20%] left-[-5%] w-[30%] h-[30%] bg-blue-500/5 rounded-full blur-[80px]"></div>
             </div>
 
-            <div className="container mx-auto px-6 relative z-10 h-full">
+            <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="mb-12 md:mb-2 relative w-fit mx-auto"
+                    className="mb-16 md:mb-20 relative w-fit mx-auto"
                 >
                     <h2 className="text-4xl md:text-5xl font-bold font-mono text-center relative z-10">
                         Certificates
@@ -203,38 +32,56 @@ export default function Certificates() {
                     <div className="absolute bottom-0 left-6 w-full h-4 bg-orange-500 -z-0"></div>
                 </motion.div>
 
-                <div className="h-[600px] w-full flex items-center justify-center cursor-default">
-                    <Canvas camera={{ position: [0, 0, isMobile ? 14 : 11], fov: 45 }}>
-                        <ambientLight intensity={0.7} />
-                        <directionalLight position={[0, 5, 10]} intensity={1.2} />
-                        <pointLight position={[-5, 2, 5]} intensity={0.5} color="#f97316" />
-                        <pointLight position={[5, 2, 5]} intensity={0.5} color="#f97316" />
-
-                        {isMobile ? (
-                            <WallOrganizer
-                                certs={allCerts}
-                                scale={0.55}
-                                position={[0, -0.5, 0]}
-                                rotation={[0, -0.1, 0]}
-                            />
-                        ) : (
-                            <>
-                                <WallOrganizer
-                                    certs={advancedCerts}
-                                    scale={1.15}
-                                    position={[-1.7, 0.5, 0]}
-                                    rotation={[0, -0.4, 0]}
+                <div className="max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {certificates.map((cert, index) => (
+                            <motion.a
+                                href={cert.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                key={cert.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                                className="relative group h-[240px] rounded-2xl overflow-hidden p-[1px]"
+                            >
+                                <div
+                                    className="absolute inset-[-100%] animate-[spin_8s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#0000_0%,#0000_85%,#ffffff_100%)] blur-xl opacity-80"
+                                    style={{ animationDelay: `-${index * 1.5}s` }}
                                 />
 
-                                <WallOrganizer
-                                    certs={basicCerts}
-                                    scale={1.15}
-                                    position={[1.7, 0.5, 0]}
-                                    rotation={[0, 0.4, 0]}
+                                <div
+                                    className="absolute inset-[-100%] animate-[spin_8s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#0000_0%,#0000_85%,#ffffff_100%)]"
+                                    style={{ animationDelay: `-${index * 1.5}s` }}
                                 />
-                            </>
-                        )}
-                    </Canvas>
+
+                                <div className="absolute inset-[1px] rounded-2xl bg-slate-900/90" />
+
+                                <div className="relative h-full w-full bg-[#0b0f19] rounded-2xl p-6 flex flex-col justify-between overflow-hidden">
+
+
+                                    <div>
+                                        <h3 className="text-xl font-bold text-white font-mono mb-2 leading-tight">
+                                            {cert.title}
+                                        </h3>
+                                        <p className="text-slate-400 text-sm font-mono mb-4">
+                                            Issued {cert.date}
+                                        </p>
+                                    </div>
+
+                                    <div className="flex justify-between items-end mt-4">
+                                        <div className="text-slate-400 font-mono text-sm leading-relaxed">
+                                            {cert.issuer}
+                                        </div>
+                                        <div className="text-emerald-400 text-2xl">
+                                            <cert.icon />
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.a>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
